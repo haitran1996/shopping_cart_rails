@@ -1,0 +1,52 @@
+<div class="container">
+  <h1> Shopping Cart </h1>
+  <div class="row">
+    <%= link_to 'Back to shopping', products_index_path, class: 'btn btn-primary' %>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Subtotal</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% unless @cart.nil? %>
+        <% @cart.each_with_index do |item, cart_counter| %>
+          <tr>
+            <th scope="row"><%= cart_counter %></th>
+            <td><img src="<%= asset_path(item[0].image) %>" style="width:100px"></td>
+            <td><%= item[0].name %></td>
+            <td><%= number_to_currency(item[0].price, separator: '.', unit: 'VND', precision: 0, format: "%n %u") %></td>
+            <td>
+              <div class="quantity">
+                <button class="btn minus1">-</button>
+                <input class="quantity" id="id_form-0-quantity" min="0" name="form-0-quantity" value="<%= item[1] %>" type="number">
+                <button class="btn add1">+</button>
+              </div>
+            </td>
+            <td><%= number_to_currency(item[0].price * item[1], separator: '.', unit: 'VND', precision: 0, format: "%n %u") %></td>
+            <td><%= link_to 'Remove', delete_cart_path(item[0].id) %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td colspan="5"></td>
+          <td><%= number_to_currency(@total, separator: '.', unit: 'VND', precision: 0, format: "%n %u") %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td colspan="7">Nothing to do here!</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="row">
+    <%= link_to 'Destroy cart' , destroy_carts_path, class: 'btn btn-danger'%>
+    <button class="btn">Check out</button>
+  </div>
+</div>

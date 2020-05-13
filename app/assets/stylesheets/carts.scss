@@ -1,0 +1,25 @@
+// Place all the styles related to the Carts controller here.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.quantity {
+    // They will automatically be included in application.css.
+    display: flex;
+    width: 160px;
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+    input,
+    button {
+        width: 5;
+        padding: .5em;
+        font-size: 1.2rem;
+        text-align: center;
+        font-weight: 900;
+        background: white;
+        border: 1px solid #aaa;
+    }
+    input {
+        border-left: none;
+        border-right: none;
+    }
+}

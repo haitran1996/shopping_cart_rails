@@ -1,0 +1,27 @@
+<div class="container">
+  <h1> List Product </h1>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image<th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each_with_index do |product, product_counter| %>
+        <tr>
+          <th scope="row"><%= product_counter + 1 %></th>
+          <th><img src="<%= asset_path(product.image) %>" style="width:100px"></th>
+          <td><%= product.name %></td>
+          <td><%= number_to_currency(product.price, separator: '.', unit: 'VND', precision: 0, format: "%n %u") %></td>
+          <td>
+            <%= link_to 'Add to cart', add_cart_path(product_counter + 1), class: 'btn btn-success' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
