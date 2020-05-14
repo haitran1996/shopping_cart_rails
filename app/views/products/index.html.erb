@@ -11,14 +11,14 @@
       </tr>
     </thead>
     <tbody>
-      <% @products.each_with_index do |product, product_counter| %>
+      <% @products.each_with_index do |product, index| %>
         <tr>
-          <th scope="row"><%= product_counter + 1 %></th>
+          <th scope="row"><%= index %></th>
           <th><img src="<%= asset_path(product.image) %>" style="width:100px"></th>
           <td><%= product.name %></td>
-          <td><%= number_to_currency(product.price, separator: '.', unit: 'VND', precision: 0, format: "%n %u") %></td>
+          <td><%= money_vn_format(product.price) %></td>
           <td>
-            <%= link_to 'Add to cart', add_cart_path(product_counter + 1), class: 'btn btn-success' %>
+            <%= link_to 'Add to cart', add_cart_path(product.id), class: 'btn btn-success' %>
           </td>
         </tr>
       <% end %>

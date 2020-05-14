@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartsController < ApplicationController
   def index
     # reset_session
@@ -9,7 +11,7 @@ class CartsController < ApplicationController
     session[:cart][params[:id]] = 1 unless session[:cart].key? params[:id]
     save_session_to_cart
 
-    render :index
+    redirect_to carts_index_path
   end
 
   def delete
@@ -19,7 +21,19 @@ class CartsController < ApplicationController
 
   def destroy
     reset_session
-    render :index
+    redirect_to carts_index_path
+  end
+
+  def increment_item
+    session[:cart][params[:id]] += 1
+    save_session_to_cart
+    redirect_to carts_index_path
+  end
+
+  def decrement_item
+    session[:cart][params[:id]] -= 1 if session[:cart][params[:id]] > 1
+    save_session_to_cart
+    redirect_to carts_index_path
   end
 
   private
